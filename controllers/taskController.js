@@ -18,6 +18,13 @@ exports.createTask = async (req, res) => {
   const newTask = req.body;
   try {
     const tasks = await readTasks();
+
+    
+    const taskId = Date.now().toString();
+
+    //auto id
+    newTask.id = taskId;
+
     tasks.push(newTask);
     await writeTasks(tasks);
     res.status(201).json(newTask);
